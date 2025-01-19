@@ -4,6 +4,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.chrome.service import Service
 
 app = Flask(__name__)
 
@@ -30,7 +31,9 @@ def search():
     chrome_options.add_argument('--no-sandbox')
     chrome_options.add_argument('--disable-dev-shm-usage')
 
-    driver = webdriver.Chrome(options=chrome_options)
+    service = Service("./chromedriver")
+
+    driver = webdriver.Chrome(options=chrome_options, service=service)
     url = "https://cab.brown.edu/"
     driver.get(url)
 
