@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results</title>
+    <link rel="stylesheet" href="../static/css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Course Availability Results</h1>
+
+        {% if error %}
+            <div class="error">{{ error }}</div>
+        {% elif free_sections %}
+            <h2>Available Sections for {{ course_code }}</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Section</th>
+                        <th>Meeting Times</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for section, time in free_sections.items() %}
+                        <tr>
+                            <td>{{ section }}</td>
+                            <td>{{ time }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <div class="message">No free sections found for {{ course_code }}.</div>
+        {% endif %}
+
+        <a href="/" class="button">Check Another Course</a>
+    </div>
+</body>
+</html>
